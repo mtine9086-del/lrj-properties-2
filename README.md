@@ -11,6 +11,7 @@ Clean, static-first property website for Laksar / Haridwar.
 - No external font or image dependency in the application
 - Contact is direct phone / WhatsApp
 - Static export enabled in `next.config.ts`
+- GitHub Pages deployment is configured through GitHub Actions
 
 ## Run locally
 
