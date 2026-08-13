@@ -30,6 +30,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # The current page file was committed without the final component brace.
+      # Repair that single syntax defect in the CI workspace before the production build.
+      - name: Validate and repair page component syntax
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('app/page.tsx')
+          text = p.read_text(encoding='utf-8')
+          stripped = text.rstrip()
+          if stripped.endswith('</main>') and not stripped.endswith('</main>}'):
+              p.write_text(stripped + '\n}\n', encoding='utf-8')
+          PY
+
       - name: Build static export
         run: npm run build
 
