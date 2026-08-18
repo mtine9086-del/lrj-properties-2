@@ -19,17 +19,21 @@ const phone = "+919876543210";
 const wa = "https://wa.me/919876543210?text=Hi%20I'm%20interested%20in%20a%20property%20on%20LRJ%20Properties.";
 const privacyUrl = "/lrj-properties-2/privacy/";
 
+const heroImage1 = "/lrj-properties-2/visuals/hero-1.svg";
+const heroImage2 = "/lrj-properties-2/visuals/hero-2.svg";
+const heroImage3 = "/lrj-properties-2/visuals/hero-3.svg";
+
 const slides = [
-  { image: "https://images.pexels.com/photos/7031581/pexels-photo-7031581.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1600", title: "Find Your Dream Property", accent: "in Laksar", text: "Buy, sell, or rent — houses, plots, flats, and commercial spaces. Your trusted local real estate partner in Haridwar, Uttarakhand." },
-  { image: "https://images.pexels.com/photos/7031594/pexels-photo-7031594.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1600", title: "Invest in Your Future", accent: "with Confidence", text: "Prime residential plots and ready-to-move houses in the best localities of Laksar and Haridwar." },
-  { image: "https://images.pexels.com/photos/7031600/pexels-photo-7031600.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1600", title: "A Better Place to", accent: "Call Home", text: "Explore practical homes, land and local property opportunities with straightforward guidance." },
-  { image: "https://images.pexels.com/photos/7031581/pexels-photo-7031581.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1600", title: "Sell or Rent", accent: "Your Property", text: "List your property with us and connect directly with local buyers and tenants." },
+  { image: heroImage1, title: "Find Your Dream Property", accent: "in Laksar", text: "Buy, sell, or rent — houses, plots, flats, and commercial spaces. Your trusted local real estate partner in Haridwar, Uttarakhand." },
+  { image: heroImage2, title: "Invest in Your Future", accent: "with Confidence", text: "Prime residential plots and ready-to-move houses in the best localities of Laksar and Haridwar." },
+  { image: heroImage3, title: "A Better Place to", accent: "Call Home", text: "Explore practical homes, land and local property opportunities with straightforward guidance." },
+  { image: heroImage1, title: "Sell or Rent", accent: "Your Property", text: "List your property with us and connect directly with local buyers and tenants." },
 ];
 
 const props = [
-  ["Residential Plot", "Residential Plot — Laksar", "Laksar, Haridwar", "1,200 sq ft", "https://images.pexels.com/photos/7031581/pexels-photo-7031581.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=700"],
-  ["Independent House", "Family Home — Roorkee Road", "Laksar, Haridwar", "1,650 sq ft", "https://images.pexels.com/photos/7031594/pexels-photo-7031594.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=700"],
-  ["Agricultural Land", "Agricultural Land — Nearby", "Haridwar District", "1 Bigha+", "https://images.pexels.com/photos/7031600/pexels-photo-7031600.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=700"],
+  ["Residential Plot", "Residential Plot — Laksar", "Laksar, Haridwar", "1,200 sq ft", heroImage1],
+  ["Independent House", "Family Home — Roorkee Road", "Laksar, Haridwar", "1,650 sq ft", heroImage2],
+  ["Agricultural Land", "Agricultural Land — Nearby", "Haridwar District", "1 Bigha+", heroImage3],
 ];
 
 const services = [
@@ -147,7 +151,7 @@ export default function HomePage() {
       <section id="inquiry" className="inquirySection"><InquiryForm /></section>
 
       <div className="floating"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top">↑</button><a href={`tel:${phone}`} aria-label="Call LRJ Properties">☎</a><a href={wa} target="_blank" rel="noopener noreferrer" className="wa" aria-label="WhatsApp LRJ Properties">◔</a></div>
-      <footer><div className="brand"><span className="brandMark"><Home size={17} /></span><span>LRJ <b>PROPERTIES</b></span></div><div><p>© 2026 LRJ Properties · Laksar & Haridwar</p><a href={privacyUrl}>Privacy Notice</a></div></footer>
+      <footer><div className="brand"><span className="brandMark"><Home size={17} /></span><span>LRJ <b>PROPERTIES</b></span></div><div><p>© 2026 LRJ Properties · Laksar & Haridwar</p><a href={privacyUrl}>Privacy Notice</a></div>
     </main>
   );
 }
