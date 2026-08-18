@@ -6,6 +6,7 @@ import styles from "./InquiryForm.module.css";
 
 const API_URL = "https://laksarproperties-api.mtine9086.workers.dev/";
 const PRIVACY_VERSION = "2026-08-18-v1";
+const PRIVACY_URL = "/lrj-properties-2/privacy/";
 
 const NAME_PATTERN = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ .'-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
 const PHONE_PATTERN = /^[6-9]\d{9}$/;
@@ -25,7 +26,6 @@ const EMPTY_FORM = {
 };
 
 type FormState = typeof EMPTY_FORM;
-
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function InquiryForm() {
@@ -179,47 +179,18 @@ export default function InquiryForm() {
         <div className={styles.grid}>
           <label>
             Name *
-            <input
-              required
-              type="text"
-              inputMode="text"
-              autoCapitalize="words"
-              autoCorrect="off"
-              maxLength={80}
-              value={form.name}
-              onChange={(event) => handleName(event.target.value)}
-              placeholder="Your full name"
-              autoComplete="name"
-              aria-describedby="name-help"
-            />
+            <input required type="text" inputMode="text" autoCapitalize="words" autoCorrect="off" maxLength={80} value={form.name} onChange={(event) => handleName(event.target.value)} placeholder="Your full name" autoComplete="name" aria-describedby="name-help" />
             <small id="name-help">Letters only; spaces, hyphens and apostrophes are allowed.</small>
           </label>
 
           <label>
             Phone *
-            <input
-              required
-              type="tel"
-              inputMode="numeric"
-              maxLength={10}
-              value={form.phone}
-              onChange={(event) => handlePhone(event.target.value)}
-              placeholder="10-digit mobile number"
-              autoComplete="tel"
-            />
+            <input required type="tel" inputMode="numeric" maxLength={10} value={form.phone} onChange={(event) => handlePhone(event.target.value)} placeholder="10-digit mobile number" autoComplete="tel" />
           </label>
 
           <label>
             Email
-            <input
-              type="email"
-              inputMode="email"
-              maxLength={254}
-              value={form.email}
-              onChange={(event) => handleEmail(event.target.value)}
-              placeholder="you@example.com"
-              autoComplete="email"
-            />
+            <input type="email" inputMode="email" maxLength={254} value={form.email} onChange={(event) => handleEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" />
           </label>
 
           <label>
@@ -238,54 +209,55 @@ export default function InquiryForm() {
 
           <label>
             Preferred location
-            <input
-              type="text"
-              maxLength={120}
-              value={form.location}
-              onChange={(event) => handleLocation(event.target.value)}
-              placeholder="Laksar, Haridwar, Roorkee..."
-              autoComplete="address-level2"
-            />
+            <input type="text" maxLength={120} value={form.location} onChange={(event) => handleLocation(event.target.value)} placeholder="Laksar, Haridwar, Roorkee..." autoComplete="address-level2" />
           </label>
 
           <label>
             Budget
-            <input
-              type="text"
-              inputMode="decimal"
-              maxLength={40}
-              value={form.budget}
-              onChange={(event) => handleBudget(event.target.value)}
-              placeholder="e.g. ₹25 lakh"
-            />
+            <input type="text" inputMode="decimal" maxLength={40} value={form.budget} onChange={(event) => handleBudget(event.target.value)} placeholder="e.g. ₹25 lakh" />
           </label>
 
           <label className={styles.full}>
             Message
-            <textarea
-              maxLength={1000}
-              value={form.message}
-              onChange={(event) => handleMessage(event.target.value)}
-              placeholder="Tell us what you need, preferred area, size, timeline, etc."
-              rows={5}
-            />
+            <textarea maxLength={1000} value={form.message} onChange={(event) => handleMessage(event.target.value)} placeholder="Tell us what you need, preferred area, size, timeline, etc." rows={5} />
             <small>{form.message.length}/1000</small>
           </label>
         </div>
 
-        <div className={styles.consentBox}>
-          <label className={styles.consentRow}>
-            <input type="checkbox" checked={form.consent} onChange={(event) => update("consent", event.target.checked)} />
-            <span>
-              I have read the <a href="/lrj-properties-2/privacy/" target="_blank" rel="noreferrer">Privacy Notice</a> and consent to LRJ Properties collecting and processing the information I provide for the specific purpose of responding to my property enquiry and providing related property assistance. *
-            </span>
-          </label>
-          <label className={styles.consentRow}>
-            <input type="checkbox" checked={form.marketing_consent} onChange={(event) => update("marketing_consent", event.target.checked)} />
-            <span>I separately consent to receive property updates, offers or promotional communications. This is optional and is not required to submit an enquiry.</span>
-          </label>
-          <p className={styles.consentNote}>You can withdraw consent or contact us about your personal data using the details in our Privacy Notice. We do not require marketing consent to handle an enquiry.</p>
-        </div>
+        <fieldset className={styles.consentBox}>
+          <legend>Privacy & consent</legend>
+
+          <div className={styles.consentRow}>
+            <input
+              id="required-consent"
+              name="consent_given"
+              type="checkbox"
+              checked={form.consent}
+              onChange={(event) => update("consent", event.currentTarget.checked)}
+              aria-required="true"
+              aria-describedby="required-consent-text"
+            />
+            <label id="required-consent-text" htmlFor="required-consent">
+              I have read the <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">Privacy Notice</a> and consent to LRJ Properties collecting and processing the information I provide for the specific purpose of responding to my property enquiry and providing related property assistance. <strong>*</strong>
+            </label>
+          </div>
+
+          <div className={styles.consentRow}>
+            <input
+              id="marketing-consent"
+              name="marketing_consent"
+              type="checkbox"
+              checked={form.marketing_consent}
+              onChange={(event) => update("marketing_consent", event.currentTarget.checked)}
+              aria-describedby="marketing-consent-text"
+            />
+            <label id="marketing-consent-text" htmlFor="marketing-consent">
+              I separately consent to receive property updates, offers or promotional communications. This is optional and is not required to submit an enquiry.
+            </label>
+          </div>
+
+          <p className={styles.consentNote}>You can withdraw consent or contact us about your personal data using the details in our Privacy Notice. Marketing consent is optional.</p>
+        </fieldset>
 
         {status === "success" && (
           <div className={styles.success} role="status">
