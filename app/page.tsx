@@ -20,24 +20,38 @@ const phone = "+919876543210";
 const wa = "https://wa.me/919876543210?text=Hi%20I'm%20interested%20in%20a%20property%20on%20LRJ%20Properties.";
 const privacyUrl = "/lrj-properties-2/privacy/";
 
-const heroImage1 = "/lrj-properties-2/visuals/hero-1.svg";
-const heroImage2 = "/lrj-properties-2/visuals/hero-2.svg";
-const heroImage3 = "/lrj-properties-2/visuals/hero-3.svg";
+const heroImage1 = "/lrj-properties-2/visuals/photos/hero-family-model.jpg";
+const heroImage2 = "/lrj-properties-2/visuals/photos/hero-family-keys.jpg";
+const heroImage3 = "/lrj-properties-2/visuals/photos/hero-couple-boxes.jpg";
+const heroImage4 = "/lrj-properties-2/visuals/photos/hero-key-handover.jpg";
+
+const propertyPlot = "/lrj-properties-2/visuals/photos/property-plot.jpg";
+const propertyHouse = "/lrj-properties-2/visuals/photos/property-house.jpg";
+const propertyAgri = "/lrj-properties-2/visuals/photos/property-agri.jpg";
+const propertyBuilding = "/lrj-properties-2/visuals/photos/property-building.jpg";
+
+const orbitPlot = "/lrj-properties-2/visuals/photos/orbit-plot.jpg";
+const orbitHouse = "/lrj-properties-2/visuals/photos/orbit-house.jpg";
+const orbitAgri = "/lrj-properties-2/visuals/photos/orbit-agri.jpg";
+const orbitBuilding = "/lrj-properties-2/visuals/photos/orbit-building.jpg";
+
+const aboutPhoto = "/lrj-properties-2/visuals/photos/about-consultation.jpg";
 
 const slides = [
   { image: heroImage1, title: "Find Your Dream Property", accent: "in Laksar", text: "Buy, sell, or rent — houses, plots, flats, and commercial spaces. Your trusted local real estate partner in Haridwar, Uttarakhand." },
   { image: heroImage2, title: "Invest in Your Future", accent: "with Confidence", text: "Prime residential plots and ready-to-move houses in the best localities of Laksar and Haridwar." },
   { image: heroImage3, title: "A Better Place to", accent: "Call Home", text: "Explore practical homes, land and local property opportunities with straightforward guidance." },
-  { image: heroImage1, title: "Sell or Rent", accent: "Your Property", text: "List your property with us and connect directly with local buyers and tenants." },
+  { image: heroImage4, title: "Sell or Rent", accent: "Your Property", text: "List your property with us and connect directly with local buyers and tenants." },
 ];
 
 const props = [
-  ["Residential Plot", "Residential Plot — Laksar", "Laksar, Haridwar", "1,200 sq ft", heroImage1],
-  ["Independent House", "Family Home — Roorkee Road", "Laksar, Haridwar", "1,650 sq ft", heroImage2],
-  ["Agricultural Land", "Agricultural Land — Nearby", "Haridwar District", "1 Bigha+", heroImage3],
+  ["Residential Plot", "Residential Plot — Laksar", "Laksar, Haridwar", "1,200 sq ft", propertyPlot],
+  ["Independent House", "Family Home — Roorkee Road", "Laksar, Haridwar", "1,650 sq ft", propertyHouse],
+  ["Agricultural Land", "Agricultural Land — Nearby", "Haridwar District", "1 Bigha+", propertyAgri],
+  ["Residential Building", "Apartment Building — Laksar", "Laksar, Haridwar", "2 BHK+", propertyBuilding],
 ];
 
-const orbitImages = [heroImage1, heroImage2, heroImage3, heroImage1, heroImage2, heroImage3];
+const orbitImages = [orbitPlot, orbitHouse, orbitAgri, orbitBuilding, orbitPlot, orbitHouse];
 
 const services = [
   ["Buy Property", "Find your home, plot, land or commercial space from practical local options."],
@@ -150,7 +164,7 @@ export default function HomePage() {
         <div className="cards">{shownProperties.length ? shownProperties.map((property, index) => <article className="card tilt-card revealCard" key={property[1]}><div className={`propertyVisual v${index % 3}`}><span>{property[0]}</span><img src={property[4]} alt={property[1]} loading="lazy" /></div><div className="cardBody"><span className="location"><MapPin size={14} />{property[2]}</span><h3>{property[1]}</h3><p>{property[3]}</p><div className="cardFoot"><strong>Contact for price</strong><a href="#inquiry">Enquire <ArrowRight size={15} /></a></div></div></article>) : <div className="empty">No matching property found. Try another search or send us an inquiry.</div>}</div>
       </section>
 
-      <section id="about" className="about revealSection" ref={aboutRef}><div className="aboutVisual"><div className="mapLines" /><div className="pin"><MapPin /></div><span>LAKSAR • HARIDWAR</span><div className="mapLabel">LOCAL MARKET FOCUS</div></div><div className="aboutText"><span className="kicker">ABOUT LRJ</span><h2>A local approach to finding the <em>right property</em>.</h2><p>We focus on useful information, honest communication and properties that make sense for everyday buyers, families and land investors.</p><div className="checks"><span><CheckCircle2 /> Local area focus</span><span><CheckCircle2 /> Property guidance</span><span><CheckCircle2 /> Visit coordination</span></div></div></section>
+      <section id="about" className="about revealSection" ref={aboutRef}><div className="aboutVisual"><img src={aboutPhoto} alt="LRJ Properties team assisting a local family" /><div className="mapLines" /><div className="pin"><MapPin /></div><span>LAKSAR • HARIDWAR</span><div className="mapLabel">LOCAL MARKET FOCUS</div></div><div className="aboutText"><span className="kicker">ABOUT LRJ</span><h2>A local approach to finding the <em>right property</em>.</h2><p>We focus on useful information, honest communication and properties that make sense for everyday buyers, families and land investors.</p><div className="checks"><span><CheckCircle2 /> Local area focus</span><span><CheckCircle2 /> Property guidance</span><span><CheckCircle2 /> Visit coordination</span></div></div></section>
 
       <section id="services" className="darkSection revealSection" ref={servicesRef}><div className="kicker">WHAT WE DO</div><h2>Simple property help,<br /><em>without the confusion.</em></h2><div className="serviceGrid">{services.map((service, index) => <div className="service" key={service[0]}><span>0{index + 1}</span><h3>{service[0]}</h3><p>{service[1]}</p><ArrowRight className="serviceArrow" size={18} /></div>)}</div></section>
 
