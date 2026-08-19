@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import InquiryForm from "./components/InquiryForm";
+import OrbitGallery from "./components/OrbitGallery";
 
 const phone = "+919876543210";
 const wa = "https://wa.me/919876543210?text=Hi%20I'm%20interested%20in%20a%20property%20on%20LRJ%20Properties.";
@@ -35,6 +36,8 @@ const props = [
   ["Independent House", "Family Home — Roorkee Road", "Laksar, Haridwar", "1,650 sq ft", heroImage2],
   ["Agricultural Land", "Agricultural Land — Nearby", "Haridwar District", "1 Bigha+", heroImage3],
 ];
+
+const orbitImages = [heroImage1, heroImage2, heroImage3, heroImage1, heroImage2, heroImage3];
 
 const services = [
   ["Buy Property", "Find your home, plot, land or commercial space from practical local options."],
@@ -135,6 +138,12 @@ export default function HomePage() {
       </section>
 
       <section className="strip marquee" aria-label="Property categories"><div className="marqueeTrack">{["🏠 Houses", "📐 Residential Plots", "🌾 Agricultural Land", "🏢 Commercial Spaces", "📍 Laksar", "📍 Haridwar", "📍 Roorkee", "🤝 Local Guidance", "📋 Documentation", "🔐 Clear Dealings", "🏠 Houses", "📐 Residential Plots"].map((item, index) => <div key={index}>{item}<span>✦</span></div>)}</div></section>
+
+      <section className="orbitSection" aria-label="Property highlights">
+        <span className="kicker">A CLOSER LOOK</span>
+        <h2>Everything we work with,<br /><em>orbiting one idea: home.</em></h2>
+        <div className="orbitStage"><OrbitGallery images={orbitImages} /></div>
+      </section>
 
       <section id="properties" className="section revealSection" ref={propertiesRef}>
         <div className="sectionHead"><div><span className="kicker">CURRENT OPTIONS</span><h2>Explore local properties</h2></div><div className="search"><Search size={17} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search property..." aria-label="Search properties" /></div></div>
