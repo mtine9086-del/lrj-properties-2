@@ -126,21 +126,20 @@ export default function KineticGrid({
       return () => ro.disconnect();
     }
 
+    let pointerLastMove = -Infinity;
+    const POINTER_TIMEOUT = 1400;
     const setMouse = (clientX: number, clientY: number) => {
       const r = canvas.getBoundingClientRect();
       const mx = clientX - r.left;
       const my = clientY - r.top;
       const inside = mx >= 0 && my >= 0 && mx <= r.width && my <= r.height;
-      mouse.active = inside;
       if (inside) {
         mouse.x = mx;
         mouse.y = my;
+        pointerLastMove = performance.now();
         const now = performance.now();
         trailPoints.push({ x: mx, y: my, t: now });
         if (trailPoints.length > 80) trailPoints.shift();
-      } else {
-        mouse.x = -9999;
-        mouse.y = -9999;
       }
     };
     const onMove = (e: MouseEvent) => setMouse(e.clientX, e.clientY);
@@ -153,8 +152,24 @@ export default function KineticGrid({
     window.addEventListener("touchmove", onTouch, { passive: true });
 
     let raf = 0;
-    const frame = () => {
+    const startTime = performance.now();
+    const frame = (ts: number) => {
       ctx.clearRect(0, 0, W, H);
+
+      const pointerRecent = ts - pointerLastMove < POINTER_TIMEOUT;
+      if (pointerRecent) {
+        mouse.active = true;
+      } else {
+        // Ambient drift: a slow figure-eight path keeps the grid visibly
+        // alive when nobody is actively hovering (always true on touch
+        // devices unless mid-drag) so the effect never reads as "broken".
+        const t = (ts - startTime) / 1000;
+        const ax = 0.28;
+        const ay = 0.22;
+        mouse.x = W / 2 + Math.sin(t * 0.35) * W * ax;
+        mouse.y = H / 2 + Math.sin(t * 0.7) * H * ay;
+        mouse.active = true;
+      }
 
       for (const d of dots) {
         let ax = (d.hx - d.x) * 0.08;
@@ -184,18 +199,18 @@ export default function KineticGrid({
             ? Math.max(0, 1 - Math.sqrt((mouse.x - d.x) ** 2 + (mouse.y - d.y) ** 2) / R)
             : 0;
           if (right) {
-            ctx.globalAlpha = 0.05 + prox * 0.55;
+            ctx.globalAlpha = 0.08 + prox * 0.6;
             ctx.strokeStyle = lineColor;
-            ctx.lineWidth = 0.5 + prox * 1.5;
+            ctx.lineWidth = 0.6 + prox * 1.6;
             ctx.beginPath();
             ctx.moveTo(d.x, d.y);
             ctx.lineTo(right.x, right.y);
             ctx.stroke();
           }
           if (down) {
-            ctx.globalAlpha = 0.05 + prox * 0.55;
+            ctx.globalAlpha = 0.08 + prox * 0.6;
             ctx.strokeStyle = lineColor;
-            ctx.lineWidth = 0.5 + prox * 1.5;
+            ctx.lineWidth = 0.6 + prox * 1.6;
             ctx.beginPath();
             ctx.moveTo(d.x, d.y);
             ctx.lineTo(down.x, down.y);
@@ -208,7 +223,7 @@ export default function KineticGrid({
         const prox = mouse.active
           ? Math.max(0, 1 - Math.sqrt((mouse.x - d.x) ** 2 + (mouse.y - d.y) ** 2) / R)
           : 0;
-        ctx.globalAlpha = 0.16 + prox * 0.6;
+        ctx.globalAlpha = 0.22 + prox * 0.65;
         ctx.fillStyle = dotColor;
         ctx.beginPath();
         ctx.arc(d.x, d.y, 0.8 + prox * 2.2, 0, 2 * Math.PI);
