@@ -55,10 +55,10 @@ const props = [
 const orbitImages = [orbitPlot, orbitHouse, orbitAgri, orbitBuilding, orbitPlot, orbitHouse];
 
 const services = [
-  ["Buy Property", "Find your home, plot, land or commercial space from practical local options."],
-  ["Sell Property", "Present your property clearly and connect with serious local buyers."],
-  ["Rent Property", "Explore houses, flats and shops around Laksar and Haridwar."],
-  ["Property Guidance", "Straightforward help with visits, documentation and local information."],
+  ["Buy Property", "Find your home, plot, land or commercial space from practical local options.", "/lrj-properties-2/visuals/photos/services/badge-buy.png"],
+  ["Sell Property", "Present your property clearly and connect with serious local buyers.", "/lrj-properties-2/visuals/photos/services/badge-sell.png"],
+  ["Rent Property", "Explore houses, flats and shops around Laksar and Haridwar.", "/lrj-properties-2/visuals/photos/services/badge-rent.png"],
+  ["Property Guidance", "Straightforward help with visits, documentation and local information.", "/lrj-properties-2/visuals/photos/services/badge-guidance.png"],
 ];
 
 function useReveal() {
@@ -167,7 +167,7 @@ export default function HomePage() {
 
       <section id="about" className="about revealSection" ref={aboutRef}><div className="aboutVisual"><img src={aboutPhoto} alt="LRJ Properties team assisting a local family" /><div className="mapLines" /><div className="pin"><MapPin /></div><span>LAKSAR • HARIDWAR</span><div className="mapLabel">LOCAL MARKET FOCUS</div></div><div className="aboutText"><span className="kicker">ABOUT LRJ</span><h2>A local approach to finding the <em>right property</em>.</h2><p>We focus on useful information, honest communication and properties that make sense for everyday buyers, families and land investors.</p><div className="checks"><span><CheckCircle2 /> Local area focus</span><span><CheckCircle2 /> Property guidance</span><span><CheckCircle2 /> Visit coordination</span></div></div></section>
 
-      <section id="services" className="darkSection revealSection" ref={servicesRef}><KineticGrid dotColor="#f5f2eb" lineColor="#e1c47d" trailColor="#e1c47d" spacing={34} radius={190} strength={4} /><div className="kicker">WHAT WE DO</div><h2>Simple property help,<br /><em>without the confusion.</em></h2><div className="serviceGrid">{services.map((service, index) => <div className="service" key={service[0]}><span>0{index + 1}</span><h3>{service[0]}</h3><p>{service[1]}</p><ArrowRight className="serviceArrow" size={18} /></div>)}</div></section>
+      <section id="services" className="darkSection revealSection" ref={servicesRef}><KineticGrid dotColor="#f5f2eb" lineColor="#e1c47d" trailColor="#e1c47d" spacing={34} radius={190} strength={4} /><div className="kicker">WHAT WE DO</div><h2>Simple property help,<br /><em>without the confusion.</em></h2><div className="serviceGrid">{services.map((service, index) => <div className="service" key={service[0]}><img className="serviceBadge" src={service[2]} alt="" loading="lazy" /><span>0{index + 1}</span><h3>{service[0]}</h3><p>{service[1]}</p><ArrowRight className="serviceArrow" size={18} /></div>)}</div></section>
 
       <section id="testimonials" className="section revealSection" ref={testimonialsRef}><div className="sectionHead"><div><span className="kicker">CLIENT FEEDBACK</span><h2>Hear from our <em>clients</em></h2></div></div><div className="cards"><article className="card"><div className="cardBody"><p>Client feedback will be published here after verified customer permission is received.</p><div className="location"><ShieldCheck size={14} /> Verified feedback only</div></div></article><article className="card"><div className="cardBody"><p>We do not publish a person&apos;s name or testimonial without appropriate permission.</p><div className="location"><ShieldCheck size={14} /> Privacy-first</div></div></article></div></section>
 
